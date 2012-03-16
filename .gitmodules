@@ -1,6 +1,0 @@
-[submodule "app/Plugin/Csscrush"]
-	path = app/Plugin/Csscrush
-	url = git://github.com/traedamatic/CssCrushCakePHP.git
-[submodule "app/Plugin/DebugKit"]
-	path = app/Plugin/DebugKit
-	url = git://github.com/cakephp/debug_kit.git

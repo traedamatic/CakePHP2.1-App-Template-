@@ -42,11 +42,12 @@
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
   <header>
-	
+	App Template for CakePHP 2.1
   </header>
   <div role="main">
 	<?php echo $this->fetch('content'); ?>
   </div>
+  
   <footer>
 	<?php echo $this->Html->link(
 						$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
@@ -61,17 +62,12 @@
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
 	<?php
-		echo $this->HTml->script('plugins');
-		echo $this->HTml->script('script');
+		echo $this->Html->script('plugins');
+		echo $this->Html->script('script');
 			
 		echo $this->fetch('script');
 		
 		echo $this->JS->writeBuffer();
 	?>  
-  
-  <script src="js/plugins.js"></script>
-  <script src="js/script.js"></script>
-
-  <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
