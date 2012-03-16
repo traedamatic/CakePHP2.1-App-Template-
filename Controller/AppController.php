@@ -36,11 +36,11 @@ class AppController extends Controller {
 	/**
 	 * @var array the app wide helpers
 	 */	
-	public $helpers = array('Html','Js' => array('Jquery'), 'Session','Form');
+	public $helpers = array('Html','Js' => array('Jquery'), 'Session','Form','Csscrush.Csscrush');
 	
 	/**
 	 * @var array the app wide helpers
 	 */	
-	public $components = array('Session','RequestHandler');
+	public $components = array('Session','RequestHandler','DebugKit.Toolbar');
 	
 }
