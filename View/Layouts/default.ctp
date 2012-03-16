@@ -50,7 +50,7 @@
   
   <footer>
 	<?php echo $this->Html->link(
-						$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
+						$this->Html->image('cake.power.gif', array('alt' => "CakePHP", 'border' => '0')),
 						'http://www.cakephp.org/',
 						array('target' => '_blank', 'escape' => false)
 					);
@@ -67,7 +67,7 @@
 			
 		echo $this->fetch('script');
 		
-		echo $this->JS->writeBuffer();
+		echo $this->J->writeBuffer();
 	?>  
 </body>
 </html>

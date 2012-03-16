@@ -64,11 +64,10 @@ td { vertical-align: top; }
 
 .chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
 
-
-
-
-
-
+@import "extras/forms.css" screen;
+@import "extras/buttons.css" screen;
+@import "extras/messages.css" screen;
+@import "extras/standards.css" screen;
 
 
 
