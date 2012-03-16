@@ -67,7 +67,7 @@
 			
 		echo $this->fetch('script');
 		
-		echo $this->J->writeBuffer();
+		echo $this->Js->writeBuffer();
 	?>  
 </body>
 </html>
