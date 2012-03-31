@@ -4,5 +4,6 @@ tmp/**/*
 
 webroot/css/style.crush.css
 webroot/css/.CssCrush
+webroot/css/.csscrush
 
 webroot/index.php
