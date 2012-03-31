@@ -4,3 +4,6 @@
 [submodule "Plugin/DebugKit"]
 	path = Plugin/DebugKit
 	url = git://github.com/cakephp/debug_kit.git
+[submodule "Plugin/CakeAjaxUploader"]
+	path = Plugin/CakeAjaxUploader
+	url = git://github.com/traedamatic/CakeAjaxUploader.git
