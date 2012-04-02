@@ -17,7 +17,7 @@
  */
 ?>
 <h1><?php echo $name; ?></h1>
-<h2>Upps! The Site you looking for does not exists! Error 400</h2>
+<h2>Upps! The Site you are looking for does not exists! Error 400</h2>
 <?php
 echo $this->Html->link('Start','/');
 ?>

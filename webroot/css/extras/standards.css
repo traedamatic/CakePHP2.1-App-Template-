@@ -1,6 +1,5 @@
 @variables {
   linkColor : #444;
-  colorOrange : #F2C076;
 }
 
 body {
@@ -13,7 +12,7 @@ p {
 }
 
 :any(h1,h2,h3) {
-	font-family: 'Karla', sans-serif;
+	font-family: Arial,sans-serif;
 	font-weight: normal;
 	margin: 0;
 }
@@ -37,7 +36,7 @@ a,a:any(:hover, :active, :focus, :visited) {
 }
 
 a:hover {
-	color: $( colorOrange );
+	text-decoration: underline;
 }
 		
 

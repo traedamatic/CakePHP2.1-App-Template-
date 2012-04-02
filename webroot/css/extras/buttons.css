@@ -11,9 +11,7 @@ a.button, button {
 	background-image: -moz-linear-gradient( center bottom, #F2F2F2 15%, #F9F9F9 80% );
 	color: #888;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
+	border-radius: 4px;	
 	text-align: center;
 	padding: 5px 10px 5px 10px;
 	border: 1px solid #EEE;
@@ -135,7 +133,7 @@ button.blue:hover {
 
 
 button.notround {
-  -webkit-border-radius: 0px;
+  border-radius: 0px;
 }
 
 button.noborder {

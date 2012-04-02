@@ -17,7 +17,7 @@
  */
 ?>
 <h1><?php echo $name; ?></h1>
-<h2>Uhh! Some went totaly wrong!</h2>
+<h2>Uhh! Something went totally wrong!</h2>
 <?php
 echo $this->Html->link('Start','/');
 ?>

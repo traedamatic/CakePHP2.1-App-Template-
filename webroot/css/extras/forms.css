@@ -1,8 +1,4 @@
 
-form:any(p.optional, div.optional){
-	display:none;
-}
-
 input[type=text],input[type=password]  {
   border: 1px solid #444;
   padding: 5px;
