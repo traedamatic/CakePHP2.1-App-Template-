@@ -42,7 +42,7 @@ after that clone this github-repo with this command (the "app" path is important
 git clone git@github.com:traedamatic/CakePHP2.1-App-Template-.git app
 ```
 
-Now, you can start your Webserver and build your app...
+Now, you can setup/start your Webserver and build your app...
 
 (...)
 
