@@ -45,7 +45,10 @@ git clone git@github.com:traedamatic/CakePHP2.1-App-Template-.git app
 
 Now, you can setup/start your Webserver and build your app...
 
-(...)
+Important!
+
+You have to create your own index.php in the app/webroot dir. In most cases it will be enough to copy the original index.php from the cakephp "core" app.
+
 
 
 ## Future Work
