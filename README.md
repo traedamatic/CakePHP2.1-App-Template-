@@ -24,6 +24,7 @@ Just a small config-based UsersController. You can add, list and delete users. N
 * CssCrush CakePHP Plugin - https://github.com/traedamatic/CssCrushCakePHP
 * DebugKit CakePHP Plugin - https://github.com/cakephp/debug_kit
 * CakeAjaxUploader CakePHP Plugin - https://github.com/traedamatic/CakeAjaxUploader
+* SiteConfig Cakephp Plugin - controlls the routes and settings of the "CakeApp" 
 
 ## How to use
 
