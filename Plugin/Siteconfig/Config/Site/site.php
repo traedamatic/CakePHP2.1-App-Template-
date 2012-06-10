@@ -2,12 +2,12 @@
 $config = array (
   'SiteSettings' => 
   array (
-    'title' => 'Roadbees - The Bees for your Business!',
+    'title' => 'SiteConfig',
     'meta' => 
     array (
-      'author' => 'nicolas',
-      'keywords' => 'keyyy',
-      'description' => 'test,hund,katze',
+      'author' => 'traeder@codebility.com',
+      'keywords' => 'site,config,routes',
+      'description' => 'controlls your site',
     ),
   ),
 );
