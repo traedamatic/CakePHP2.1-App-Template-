@@ -41,6 +41,10 @@ class User extends AppModel {
 			'length' => 255
 			)
 	);
+	
+	public function schema() {
+		return $this->_schema;
+	}
 
 	/**
 	 *  custom find method

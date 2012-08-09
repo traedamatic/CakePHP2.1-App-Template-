@@ -41,6 +41,6 @@ class AppController extends Controller {
 	/**
 	 * @var array the app wide helpers
 	 */	
-	public $components = array('Session','RequestHandler','DebugKit.Toolbar');
+	public $components = array('Auth','Session','RequestHandler');
 	
 }

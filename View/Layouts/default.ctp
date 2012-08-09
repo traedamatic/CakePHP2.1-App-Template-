@@ -41,22 +41,24 @@
 </head>
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-  <header>
-	App Template for CakePHP 2.1
-  </header>
-  <div role="main">
-	<?php echo $this->fetch('content'); ?>
+  <div id="container">
+	 <header>
+	  <h1>App Template for CakePHP 2.2</h1>
+	  <p>-> fast fun with CakePHP</p>
+	 </header>
+	 <div role="main">
+	  <?php echo $this->fetch('content'); ?>
+	 </div>
+	 
+	 <footer>
+	  <?php echo $this->Html->link(
+						  $this->Html->image('cake.power.gif', array('alt' => "CakePHP", 'border' => '0')),
+						  'http://www.cakephp.org/',
+						  array('target' => '_blank', 'escape' => false)
+					  );
+				  ?>
+	 </footer>
   </div>
-  
-  <footer>
-	<?php echo $this->Html->link(
-						$this->Html->image('cake.power.gif', array('alt' => "CakePHP", 'border' => '0')),
-						'http://www.cakephp.org/',
-						array('target' => '_blank', 'escape' => false)
-					);
-				?>
-  </footer>
-
 	
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
