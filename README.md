@@ -1,6 +1,9 @@
-#App Template for CakePHP 2.1
+#App Template for CakePHP 2.2
 
 This project should speed up the creating of a CakePHP Apps/Websites.
+
+This template needs CakePHP 2.2.x now!  
+
 
 ##Including
 

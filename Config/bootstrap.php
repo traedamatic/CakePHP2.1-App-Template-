@@ -178,7 +178,7 @@ CakeLog::config('error', array(
 	'engine' => 'FileLog',
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
-));
+)); 
 
 /**
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
