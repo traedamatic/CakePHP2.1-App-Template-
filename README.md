@@ -19,15 +19,17 @@ Just a small config-based UsersController. You can add, list and delete users. N
 * Custom Flash Elements
 * Custom Error Messages (400 & 500)
 
-### Third-Party Libaries
+### Third-Party Libraries
 
 * Jquery - http://jquery.com
 * Modernizr - http://modernizr.com
-* Html 5 Boilerplate - http://html5boilerplate.com
+* Html 5 Boilerplate mixed with 99lime HTML Kickstart CSS - http://html5boilerplate.com | http://99lime.com
 * CssCrush CakePHP Plugin - https://github.com/traedamatic/CssCrushCakePHP
-* DebugKit CakePHP Plugin - https://github.com/cakephp/debug_kit
 * CakeAjaxUploader CakePHP Plugin - https://github.com/traedamatic/CakeAjaxUploader
-* SiteConfig Cakephp Plugin - controlls the routes and settings of the "CakeApp" 
+
+### Own Stuff
+* SiteConfig Cakephp Plugin - controlls the routes and settings of the "CakeApp"
+* UsersController (see above)
 
 ## How to use
 
@@ -52,6 +54,29 @@ Important!
 
 You have to create your own index.php in the app/webroot dir. In most cases it will be enough to copy the original index.php from the cakephp "core" app.
 
+### git submodules
+
+In the app-folder you have to run this both commands:
+
+```
+git submodule init
+git submodule update
+```
+
+After that you should go the Plugin/Csscrush - folder and run both commands again.
+
+Now, all the submodules are ready to use.
+
+### chmod (tmp, css)
+
+CakePHP needs a tmp folder in the appdir. For me the best way is to copy the tmp-folder
+from cakephp-app which comes with cakephp-core. Don't forget to "chmod -R 777" the whole folder
+
+CssCrush needs wirte access to the webroot/css folder.
+
+``` 
+chmod 777 webroot/css
+```
 
 
 ## Future Work
