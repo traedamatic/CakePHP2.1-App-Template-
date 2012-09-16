@@ -20,7 +20,7 @@ Just a small config-based UsersController. You can add, list and delete users. N
 This plugin provides two function.
 
 * "SiteSetting" - You can create custom settings and use them in your app.
-* "DynRoute" function - You can add custom routes for you app. The plugin will automaticlly create the right cakephp routes for you.
+* "DynRoute" - You can add custom routes to your app. The plugin will automaticlly create the right cakephp routes for you.
 
 ### Views
 
@@ -86,7 +86,7 @@ CssCrush needs wirte access to the webroot/css folder.
 chmod 777 webroot/css
 ```
 
-and the SiteConfig need write access for the configfiles
+and the SiteConfig Plugin need write access for the configfiles:
 
 ``` 
 chmod -R 777 Plugin/Siteconfig/Config/Site/*
