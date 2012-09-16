@@ -91,8 +91,7 @@ class SettingsController extends SiteconfigAppController {
 		
 		$settingKeys = explode('.',$settingKey);
 		
-		if(isset($settingKeys[0])) {
-			$this->loadModel('Siteconfig.Setting');
+		if(isset($settingKeys[0])) {			
 			$settings = $this->Setting->find();
 			debug($settings);
 			if(isset($settingKeys[1])) {
@@ -124,5 +123,49 @@ class SettingsController extends SiteconfigAppController {
 		$this->render('Elements/ajax','ajax');
 		
 		
+	}
+	
+	/**
+	 *
+	 * edit a setting 
+	 */
+	public function manager_edit() {
+		if(!$this->request->is('post')) $this->redirect(array('action' =>'index'));
+		if(!$this->request->is('ajax')) $this->redirect(array('action' =>'index'));
+		
+		
+		debug($this->data);		
+		$doSave = false;
+		$settings = $this->Setting->find();
+		$key = $this->data['Setting']['key'];
+		$namespace = $this->data['Setting']['namespace'];
+		if(!isset($key)) {
+			$this->set('result','Error - Key not set');			
+		} else {
+			if(!empty($namespace)) {
+				if(isset($settings[$namespace][$key])) {
+					$settings[$namespace][$key] = $this->data['Setting']['value'];
+					$doSave = true;
+				} else {					
+					$this->set('result','Error - Key or Namespace in Setting not found');
+				}
+			} else {
+				if(isset($settings[$key])) {
+					$settings[$key] = $this->data['Setting']['value'];
+					$doSave = true;
+				} else {
+					$this->set('result','Error - Key in Setting not found');			
+				}
+			}
+		}
+		if($doSave === true) {
+			if($this->Setting->save(array('SiteSettings' => $settings))) {
+				$this->set('result','okay');			
+			} else {
+				$this->set('result','Error - Sitesettting could not be saved');			
+			}
+		}
+		
+		$this->set('_serialize', array('result'));
 	}
 }

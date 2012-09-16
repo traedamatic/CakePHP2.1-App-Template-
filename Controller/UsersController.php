@@ -29,7 +29,7 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 		
 		$this->Auth->deny();
-		$this->Auth->allow(array('login','logout','manager_add'));
+		$this->Auth->allow(array('login','logout'));
 	}
 	
 	/**

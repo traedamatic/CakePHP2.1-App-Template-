@@ -1,80 +1,107 @@
 <div class="view manager form" id="site-settings">
-	<h1>Seiteneinstellungen</h1>
+	<h1><?php echo __('Website - Settings'); ?></h1>
 	
-	<?php
-		echo $this->Form->create('SiteSettings',array('url' => array('controller' => 'settings', 'action' => 'add', 'manager' => true)));
-	?>
-	
-	<div class="main-settings">
-		<h2>Haupteinstellungen - </h2>
-		<?php
-			foreach( $settings as $key => $value):
-				if(is_array($value)) continue;
-		?>		<div class="setting">
-				<a href="#delete-setting" class="delete-setting" data-settingkey="<?php echo $key?>">Einstellung löschen</a>
-		<?php
-				echo $this->Form->input($key,array('type' => 'text', 'default' => $value,'label' => $key));
-		?>
-				</div>
-		<?php
-			endforeach;
-		?>
-		<a href="#einstellung" id="add-setting">Neue Einstellung anlegen</a>
+	<div id="settings-table">
+		<table>
+			<thead>
+				<?php
+					echo $this->Html->tableHeaders(
+									array(__('Name'),__('Namespace'),__('Value'),__('Action'))	
+									);
+				?>
+			</thead>
+			<tbody>
+				<?php
+					$tableRows = array();										
+					$actions = $this->Html->link(__('Edit'),'#edit', array('class' => 'btn-edit-setting')).' | '.$this->Html->link(__('Delete'),'#delete', array('class' => 'btn-delete-setting'));
+					foreach($settings as $key => $value):
+						$tableRow = array();
+						if(is_array($value)) {
+							foreach($value as $name => $setting):
+								$tableRow = array();								
+								$tableRow[] = $name;
+								$tableRow[] = $key;
+								$tableRow[] = $setting;
+								$tableRow[] = $actions;
+								array_push($tableRows,$tableRow);
+							endforeach;
+						} else {
+							$tableRow[] = $key;
+							$tableRow[] = '';
+							$tableRow[] = $value;
+							$tableRow[] = $actions;
+							array_push($tableRows,$tableRow);
+						}							
+					endforeach;					
+					echo $this->Html->tableCells($tableRows);
+				?>
+			</tbody>
+		</table>
 	</div>
 	
-	<div class="meta-data">
-		<h2>Meta-Daten</h2>
+	
+	<div id="edit-setting-form">
+		<h2><?php echo __('Edit Setting') ?></h2>
+		<p id="setting-key"></p>
 		<?php
-			foreach($settings['meta'] as $metakey => $metafield) {
-				echo '<div class="setting">';
-				echo '<a href="#delete-setting" class="delete-setting" data-settingkey="meta.'.$metakey.'">Einstellung löschen</a>';
-				echo $this->Form->input('SiteSettings.meta.'.$metakey,array('type' => 'text', 'default' => $metafield,'label' => $metakey));
-				echo '</div>';
-			}
+			
+			echo $this->Form->create('SiteSettings',array('url' => array('controller' => 'settings', 'action' => 'edit', 'manager' => true),'id' => 'EditSettingForm'));
+			echo $this->Form->input('Setting.namespace',array('type' => 'hidden', 'label' => __('Namespace')));
+			echo $this->Form->input('Setting.key',array('type' => 'hidden', 'label' => __('Key')));
+			echo $this->Form->input('Setting.value',array('type' => 'text','label' => __('Value')));
+			echo $this->Form->button(__('Save setting'));
+			echo $this->Form->end();
 		?>
-		<a href="#addmeta" id="add-meta">Neue Meta - Einstellung anlegen</a>
+		<hr class="alt"/>
 	</div>
 	
-	<?php
-		echo $this->Form->button('Einstellungen speichern');
-		echo $this->Form->end();
-	?>
-	
+	<div id="new-setting-form">
+		<h2><?php echo __('Create new Setting') ?></h2>
+		<?php
+			echo $this->Form->create('SiteSettings',array('url' => array('controller' => 'settings', 'action' => 'add', 'manager' => true)));
+			echo $this->Form->input('Setting.namespace',array('type' => 'text', 'label' => __('Namespace')));
+			echo $this->Form->input('Setting.key',array('type' => 'text', 'label' => __('Key')));
+			echo $this->Form->input('Setting.value',array('type' => 'text','label' => __('Value')));
+			echo $this->Form->button(__('Save setting'));
+			echo $this->Form->end();
+		?>
+	</div>
 </div>
 
 <?php
 
 $this->Js->buffer("
+		$('#site-settings').on('click','a.btn-edit-setting',function(){
+		var _parentTr = $(this).parents('tr'),
+			 _key = _parentTr.find('td:eq(0)').text(),
+			 _namespace = _parentTr.find('td:eq(1)').text(),
+			 _value = _parentTr.find('td:eq(2)').text();
 			
-	$('#site-settings').on('click','a.delete-setting',function(){
-			var _settingKey = $(this).attr('data-settingkey'),
-				 _parent = $(this).parent();
-				 
-			$.get('/manager/siteconfig/settings/delete/'+_settingKey,function(data){
-			
-				_parent.fadeOut(function(){
-					_parent.remove();
-					});		
-			});
+		$('div#edit-setting-form input#SettingKey').val(_key);
+		$('div#edit-setting-form input#SettingValue').val(_value);
+		$('div#edit-setting-form input#SettingNamespace').val(_namespace);
+		$('p#setting-key').text(_key+'.'+_namespace);
 		
-			
+		$('div#edit-setting-form').fadeIn('fast');
+		
+		$('form#EditSettingForm').on('submit',function(){
+			var _url = $(this).attr('action')+'.json';
+			console.log(_url);
+			var _data = $(this).serialize();
 			return false;
+			$.post(_url,_data,function(response){
+				if(response.result == 'okay') {
+					_parentTr.find('td:eq(1)').text($('div#route-form-edit input#RouteRoute').val());
+					_parentTr.find('td:eq(2)').text($('div#route-form-edit input#RouteUrl').val());
+					$('div#route-form-edit').fadeOut('fast');
+				} else {
+					$('div#route-form-edit').html('<p>Error - Bitte neuladen</p>');	
+				}
+				
+			});
+			return false;
+		});
+		
+		return false;
 	});
-	
-	$('#add-setting').on('click',function(){
-			var _newHTML = '".$this->Form->input('NewSetting.key',array('type' => 'text', 'label' => 'Einstellungname'))."'
-								+'".$this->Form->input('NewSetting.value',array('type' => 'text', 'label' => 'Einstellungwert'))."';
-								
-			$(this).before(_newHTML);
-								
-	});
-	
-	$('#add-meta').on('click',function(){
-			var _newHTML = '".$this->Form->input('NewMetaSetting.key',array('type' => 'text', 'label' => 'Meta-Name'))."'
-								+'".$this->Form->input('NewMetaSetting.value',array('type' => 'text', 'label' => 'Meta-Wert'))."';
-								
-			$(this).before(_newHTML);
-								
-	});
-						
-				");
+			");
