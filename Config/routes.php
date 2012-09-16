@@ -24,6 +24,9 @@
  
  
 	Router::connect('/', array('controller' => 'pages', 'action' => 'index'));
+	
+	/** manager dashboard route */
+	Router::connect('/manager', array('controller' => 'pages', 'action' => 'dashboard','manager' => true));
 
 	CakePlugin::routes();
 

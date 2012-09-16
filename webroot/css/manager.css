@@ -1,0 +1,193 @@
+
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+/*
+ * START IMPORT
+ * Import Kickstart Css Files
+ * More Information http://www.99lime.com/
+ */
+@import "kickstart/css/prettify.css";
+@import "kickstart/css/kickstart-buttons.css";
+@import "kickstart/css/kickstart-forms.css";
+@import "kickstart/css/kickstart-menus.css";
+@import "kickstart/css/kickstart-grid.css";
+@import "kickstart/css/kickstart-icons.css";
+@import "kickstart/css/prettify.css";
+@import "kickstart/css/kickstart.css";
+/*
+ * END IMPORT 
+ */
+
+/* taken from the example kickstart style */
+body{
+  margin:0;
+  padding:0;
+  color:#000;
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+  text-shadow: 0px 0px 1px transparent; /* google font pixelation fix */
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+}
+
+thead th,
+tbody th{
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+}
+
+button,
+a.btn,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]{
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+}
+
+.menu{
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+}
+
+blockquote{
+  font-family: "Trebuchet Ms", arial, verdana, sans-serif;
+}
+
+/** Start Custom Style CakePHP AppTemplate */
+
+#container {
+  margin: auto;
+  width: 960px;
+  box-shadow: 2px 2px 10px #ccc;
+}
+
+@in #container {
+  #content {
+	 padding: 15px;
+	 padding-top: 0;
+  }
+  
+  header {
+	 padding: 15px;
+	 margin-bottom: 0;
+	 border-bottom: 1px solid #444;
+	 position: relative;
+  }
+  
+  @in header {
+	 h1 {
+		color: #4F4F4F;
+		margin-bottom: 0;
+		font-size: 1.8em;
+	 }
+	 
+	 p {
+		color: #F94F31;
+		margin: 0;
+		padding-bottom: 0;
+		padding-left: 50px;
+		font-weight: bold;
+	 }
+	 
+	 a#btn-logout {
+		position: absolute;
+		left: 85%;
+		top: 30px;
+		width: 75px;
+		height: 35px;
+	 }
+  }
+  
+  #authMessage,
+  #flashMessage {
+	 text-align: center;
+	 font-weight: bold;
+	 font-size: 1.3em;
+	 padding: 15px;
+	 margin: 10px;
+	 border: 1px solid #F9C431;
+	 color: #FFBF0F;
+  }
+  
+  #authMessage {
+	 border: 1px solid #F75531;
+	 color: #FF430F; 
+  }
+  
+  footer {
+	 padding: 15px;
+	 border-top: 1px solid #444;
+  }
+  
+  @in footer  {
+	 p {
+		color: #F94F31;
+		font-size: 0.9em;
+	 }
+  }
+  
+  nav {
+	 padding: 5px;
+	 background-color: #F7F7F7;
+	 border-bottom: 1px solid #444;
+	 box-shadow: 0px 1px 5px #ccc
+  }
+  
+  @in nav {
+	 a {
+		padding-right: 5px;
+	 }
+	 
+	 a:hover {
+		color: #F94F31;
+	 }
+  }
+}
+
+
+
+p {
+  color: #000;
+}
+
+label {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 35em) {
+  
+
+}
+
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+.hidden { display: none !important; visibility: hidden; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+@media print {
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } 
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}

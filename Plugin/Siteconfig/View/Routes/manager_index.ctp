@@ -61,8 +61,8 @@
 <?php $this->Js->buffer("
 		
 	$('#site-routes').on('click','a.btn-edit-route',function(){
-		var _parentTr = $(this).parents('tr'),
-			 _number = _parentTr.find('td:eq(0)').text(),
+		window._parentTr = $(this).parents('tr');
+		var _number = _parentTr.find('td:eq(0)').text(),
 			 _route = _parentTr.find('td:eq(1)').text(),
 			 _url = _parentTr.find('td:eq(2)').text();
 			
@@ -71,9 +71,14 @@
 		
 		$('div#route-form-edit').fadeIn('fast');
 		
-		$('form#RouteEditForm').on('submit',function(){
-			var _url = $(this).attr('action')+'/'+_number+'.json';
-			console.log(_url);
+		return false;
+	});
+	
+	$('form#RouteEditForm').on('submit',function(){
+			var _number = _parentTr.find('td:eq(0)').text(),
+				 _url = $(this).attr('action')+'/'+_number+'.json';
+			
+			
 			var _data = $(this).serialize();
 			
 			$.post(_url,_data,function(response){
@@ -87,9 +92,6 @@
 				
 			});
 			return false;
-		});
-		
-		return false;
 	});
 	
 

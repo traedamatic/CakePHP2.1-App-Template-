@@ -13,11 +13,12 @@
 			<tbody>
 				<?php
 					$tableRows = array();										
-					$actions = $this->Html->link(__('Edit'),'#edit', array('class' => 'btn-edit-setting')).' | '.$this->Html->link(__('Delete'),'#delete', array('class' => 'btn-delete-setting'));
+					
 					foreach($settings as $key => $value):
 						$tableRow = array();
 						if(is_array($value)) {
 							foreach($value as $name => $setting):
+								$actions = $this->Html->link(__('Edit'),'#edit', array('class' => 'btn-edit-setting')).' | '.$this->Html->link(__('Delete'),array('action' => 'delete', 'manager' => true,$key.'.'.$name), array('class' => 'btn-delete-setting'));
 								$tableRow = array();								
 								$tableRow[] = $name;
 								$tableRow[] = $key;
@@ -26,6 +27,7 @@
 								array_push($tableRows,$tableRow);
 							endforeach;
 						} else {
+							$actions = $this->Html->link(__('Edit'),'#edit', array('class' => 'btn-edit-setting')).' | '.$this->Html->link(__('Delete'),array('action' => 'delete', 'manager' => true,$key), array('class' => 'btn-delete-setting'));
 							$tableRow[] = $key;
 							$tableRow[] = '';
 							$tableRow[] = $value;
@@ -40,7 +42,7 @@
 	</div>
 	
 	
-	<div id="edit-setting-form">
+	<div id="edit-setting-form" style="display: none;">
 		<h2><?php echo __('Edit Setting') ?></h2>
 		<p id="setting-key"></p>
 		<?php
@@ -68,31 +70,48 @@
 	</div>
 </div>
 
+<hr />
+<div id="howto">
+	<h2>Usage in your CakePHP App</h2>
+	<p>The use of the Settings in your app is simple!</p>
+	<p>You have just to call the static read function of the Configure Class</p>
+	<p>Example:</p>
+	<!-- Code PHP -->
+	<pre class="php">		
+			Configure::read('SiteSettings.title');
+			
+			//or for settings with namespace			
+			Configure::read('SiteSettings.meta.author');
+	</pre>
+</div>
+
 <?php
 
 $this->Js->buffer("
 		$('#site-settings').on('click','a.btn-edit-setting',function(){
-		var _parentTr = $(this).parents('tr'),
-			 _key = _parentTr.find('td:eq(0)').text(),
-			 _namespace = _parentTr.find('td:eq(1)').text(),
-			 _value = _parentTr.find('td:eq(2)').text();
+			window._parentTr = $(this).parents('tr');
+			var _key = _parentTr.find('td:eq(0)').text(),
+				 _namespace = _parentTr.find('td:eq(1)').text(),
+				 _value = _parentTr.find('td:eq(2)').text();
+				
+			$('div#edit-setting-form input#SettingKey').val(_key);
+			$('div#edit-setting-form input#SettingValue').val(_value);
+			$('div#edit-setting-form input#SettingNamespace').val(_namespace);
+			$('p#setting-key').text(_namespace+'.'+_key);
 			
-		$('div#edit-setting-form input#SettingKey').val(_key);
-		$('div#edit-setting-form input#SettingValue').val(_value);
-		$('div#edit-setting-form input#SettingNamespace').val(_namespace);
-		$('p#setting-key').text(_key+'.'+_namespace);
-		
-		$('div#edit-setting-form').fadeIn('fast');
+			$('div#edit-setting-form').fadeIn('fast');
+			
+			return false;
+		});
 		
 		$('form#EditSettingForm').on('submit',function(){
 			var _url = $(this).attr('action')+'.json';
 			console.log(_url);
 			var _data = $(this).serialize();
-			return false;
+			
 			$.post(_url,_data,function(response){
-				if(response.result == 'okay') {
-					_parentTr.find('td:eq(1)').text($('div#route-form-edit input#RouteRoute').val());
-					_parentTr.find('td:eq(2)').text($('div#route-form-edit input#RouteUrl').val());
+				if(response.result == 'okay') {					
+					_parentTr.find('td:eq(2)').text($('div#edit-setting-form input#SettingValue').val());
 					$('div#route-form-edit').fadeOut('fast');
 				} else {
 					$('div#route-form-edit').html('<p>Error - Bitte neuladen</p>');	
@@ -102,6 +121,4 @@ $this->Js->buffer("
 			return false;
 		});
 		
-		return false;
-	});
 			");

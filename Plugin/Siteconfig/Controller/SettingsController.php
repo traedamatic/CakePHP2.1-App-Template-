@@ -56,21 +56,22 @@ class SettingsController extends SiteconfigAppController {
 	 */
 	public function manager_add() {
 		if($this->request->is('post')) {
-						
-			if(isset($this->data['NewSetting'])) {
-				$this->request->data['SiteSettings'][$this->data['NewSetting']['key']] = $this->data['NewSetting']['value'];
-				unset($this->request->data['NewSetting']);
-			}
-						
-			if(isset($this->data['NewMetaSetting'])) {
-				$this->request->data['SiteSettings']['meta'][$this->data['NewMetaSetting']['key']] = $this->data['NewMetaSetting']['value'];
-				unset($this->request->data['NewMetaSetting']);
+			if(!isset($this->data['Setting']['key'])) $this->redirect(array('action' =>'index'));
+				
+			$settings = $this->Setting->find('all');
+					
+			$key = $this->data['Setting']['key'];			
+			
+			if(isset($this->data['Setting']['namespace'])) {
+				$settings[$this->data['Setting']['namespace']][$key] = $this->data['Setting']['value'];
+			} else {
+				$settings[$key] = $this->data['Setting']['value'];
 			}
 			
-			if($this->Setting->save($this->data)) {
-				$this->Session->setFlash('Einstellungen gespeichert');
+			if($this->Setting->save(array('SiteSettings' => $settings))) {
+				$this->Session->setFlash(__('Setting saved'));
 			} else {				
-				$this->Session->setFlash('Einstellungen  konnten nicht gespeichert');				
+				$this->Session->setFlash(__('Setting could not be saved saved'));
 			}
 			
 			$this->redirect(array('controller' => 'settings', 'action' => 'index', 'manager' => true, 'plugin' => 'siteconfig'));
@@ -84,9 +85,8 @@ class SettingsController extends SiteconfigAppController {
 	 */
 	public function manager_delete($settingKey = null) {
 		if(is_null($settingKey)) {
-			$this->set('result','fail');
-			$this->render('Elements/ajax','ajax');
-			return;
+			$this->Session->setFlash(__('No Setting Key set'));
+			$this->redirect(array('action' =>'index'));
 		}
 		
 		$settingKeys = explode('.',$settingKey);
@@ -98,29 +98,27 @@ class SettingsController extends SiteconfigAppController {
 				if(isset($settings[$settingKeys[0]][$settingKeys[1]])) {
 					unset($settings[$settingKeys[0]][$settingKeys[1]]);
 				} else {
-					$result = 'fail';
+					$this->Session->setFlash(__('Setting not found'));
 				}
 			} else {
 				if(isset($settings[$settingKeys[0]])) {
 					unset($settings[$settingKeys[0]]);
 				} else {
-					$result = 'fail';
+					$this->Session->setFlash(__('Setting not found'));
 				}	
 			}
 			
 			if($this->Setting->save(array('SiteSettings' => $settings))) {
-				$result = 'okay';
+				$this->Session->setFlash(__('Setting deleted'));
 			} else {
-				$result = 'fail';
+				$this->Session->setFlash(__('Setting could not be deleted'));
 			}
 						
 		} else {
-			$result = 'fail';
+			$this->Session->setFlash(__('Setting Key not found'));
 		}
-		
-		
-		$this->set('result',$result);
-		$this->render('Elements/ajax','ajax');
+				
+		$this->redirect(array('action' =>'index'));
 		
 		
 	}
@@ -133,8 +131,6 @@ class SettingsController extends SiteconfigAppController {
 		if(!$this->request->is('post')) $this->redirect(array('action' =>'index'));
 		if(!$this->request->is('ajax')) $this->redirect(array('action' =>'index'));
 		
-		
-		debug($this->data);		
 		$doSave = false;
 		$settings = $this->Setting->find();
 		$key = $this->data['Setting']['key'];
@@ -158,6 +154,7 @@ class SettingsController extends SiteconfigAppController {
 				}
 			}
 		}
+			
 		if($doSave === true) {
 			if($this->Setting->save(array('SiteSettings' => $settings))) {
 				$this->set('result','okay');			

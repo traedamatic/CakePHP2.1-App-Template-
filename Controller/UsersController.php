@@ -33,6 +33,13 @@ class UsersController extends AppController {
 	}
 	
 	/**
+	 * custom controller wide beforeRender function
+	 */
+	public function beforeRender(){
+		$this->layout = "manager";
+	}
+	
+	/**
 	 *
 	 * login 
 	 * handles the login action

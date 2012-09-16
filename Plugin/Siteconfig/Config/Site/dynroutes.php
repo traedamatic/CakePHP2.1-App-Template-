@@ -23,11 +23,11 @@
     ),
     2 => 
     array (
-      'route' => '/',
+      'route' => '/contact',
       'url' => 
       array (
-        'controller' => 'contact',
-        'action' => 'form',
+        'controller' => 'pages',
+        'action' => 'index',
       ),
     ),
   ),

@@ -10,4 +10,10 @@
  *	
  */
 class SiteconfigAppController extends AppController {
+	/**
+	 * custom plugin wide beforeRender function
+	 */
+	public function beforeRender() {
+		$this->layout = "manager";
+	}
 }

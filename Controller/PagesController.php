@@ -56,14 +56,29 @@ class PagesController extends AppController {
 		parent::beforeFilter();
 		
 		$this->Auth->allow();
+		$this->Auth->deny(array('manager_dashboard'));
 	}
 
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- */
-	public function index() {		
+	/**
+	 *
+	 * @return void
+	 */
+	public function index() {
+		
+	}
+	
+	/**	 
+	 * small sample nginx conf 
+	 */
+	public function nginx() {
+		
+	}
+	
+	/**
+	 * manager dashboard
+	 */
+	public function manager_dashboard() {
+		$this->layout = 'manager';
+		
 	}
 }
