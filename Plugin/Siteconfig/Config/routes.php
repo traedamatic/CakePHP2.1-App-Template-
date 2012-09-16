@@ -1,4 +1,4 @@
-<?php
+	<?php
 /**
  * SiteConfig Plugin Routes
  * 
@@ -21,14 +21,15 @@ foreach($siteRoutes as $newRoute) {
 	Router::connect($newRoute['route'],$newRoute['url']);
 }
  
+Router::parseExtensions('json');
  
 /** Static Plugin Routes **/
 
 /** Routes Routes */
 Router::connect('/manager/site/routes', array('plugin' => "siteconfig",'controller' => 'routes', 'action' => 'index', "manager" => true));
-Router::connect('/manager/site/routes/:action', array('plugin' => "siteconfig",'controller' => 'routes', "manager" => true));
+Router::connect('/manager/site/routes/:action/*', array('plugin' => "siteconfig",'controller' => 'routes', "manager" => true));
 
 /** Settings Routes */
 Router::connect('/manager/site/settings', array('plugin' => "siteconfig",'controller' => 'settings', 'action' => 'index', "manager" => true));
-Router::connect('/manager/site/settings/:action', array('plugin' => "siteconfig",'controller' => 'settings', "manager" => true));
+Router::connect('/manager/site/settings/:action/*', array('plugin' => "siteconfig",'controller' => 'settings', "manager" => true,));
 

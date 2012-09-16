@@ -43,4 +43,12 @@ class AppController extends Controller {
 	 */	
 	public $components = array('Auth','Session','RequestHandler');
 	
+	/**
+	 *
+	 * custom App-Wide beforeFilter 
+	 */
+	public function beforeFilter() {
+		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'manager' => false,'plugin' => false);
+	}
+	
 }

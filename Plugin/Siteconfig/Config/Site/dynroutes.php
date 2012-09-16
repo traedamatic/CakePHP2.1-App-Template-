@@ -9,17 +9,25 @@
       array (
         'controller' => 'pages',
         'action' => 'view',
-        0 => 'weiterbildung',
+        0 => 'index',
       ),
     ),
     1 => 
     array (
-      'route' => '/aboutus',
+      'route' => '/impressum',
       'url' => 
       array (
         'controller' => 'pages',
-        'action' => 'view',
-        0 => 'baum',
+        'action' => 'imprint',
+      ),
+    ),
+    2 => 
+    array (
+      'route' => '/',
+      'url' => 
+      array (
+        'controller' => 'contact',
+        'action' => 'form',
       ),
     ),
   ),

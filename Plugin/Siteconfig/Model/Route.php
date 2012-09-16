@@ -28,7 +28,7 @@ class Route extends SiteconfigAppController {
 	 * custom find function
 	 * @access public
 	 */
-	public function  find(){
+	public function find($type, $params = array()){
 		Configure::restore('Siteconfig.Site/dynroutes');
 		return Configure::read('Siteroutes');
 	}
@@ -46,10 +46,17 @@ class Route extends SiteconfigAppController {
 		$data = array('Siteroutes' => array());
 		
 		if($isArray === false) {
-			foreach($newData['Route'] as $route) {				
-				if(empty($route['url']) || empty($route['route'])) continue;
-				$urlArray = explode(':',$route['url']);
+			foreach($newData as $route) {				
+				if(empty($route['url']) ||
+						empty($route['route'])) continue;
 				
+				if(is_array($route['url'])) {
+					$data['Siteroutes'][] = $route;
+					continue;
+				}
+				
+				$urlArray = explode(':',$route['url']);
+			
 				if(!isset($urlArray[0]) || !isset($urlArray[1])) continue;
 				
 				$url = array(

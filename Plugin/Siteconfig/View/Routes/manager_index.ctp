@@ -1,85 +1,94 @@
 <div id="site-routes" class="manager site form">
-	<h1>Seitenrouten bearbeiten</h1>
+	<h1><?php echo __("Website - Routes") ?></h1>
 	<p class="info">
 	Achtung! Jegliche Änderungen hier können die Funktionsweise der
 	Internetseite <b>stark</b> beeinträchtigen. Wenn Sie nicht genau wissen, wie
 	Seitenrouten funktionieren fragen Sie bitte Ihren Administrator.
-	</p>	
-	<div id="routes">
-		<?php echo $this->Form->create('Siteroutes',array('url' => array('controller' => 'routes', 'action' => 'add', 'manager' => true ))); ?>
-		<h2>Aktuelle Routen</h2>
-		<?php
-		$countRoutes = 0 ;			
-			foreach($siteRoutes as $currentRoute) {
+	</p>
+	
+	<div id="routes-table">
+		<table>
+			<thead>
+				<?php
+					echo $this->Html->tableHeaders(
+									array(__('Number'),__('Route'),__('Controller'),__('Action'))	
+									);
+				?>
+			</thead>
+			<tbody>
+				<?php
+					$routesArray = array();
+					
+					foreach($siteRoutes as $index => $currentRoute) {
+						array_push($routesArray,
+									  array(
+												$index,
+												$currentRoute['route'],
+												implode(':',$currentRoute['url']),
+												$this->Html->link(__('Edit'),'#edit',array('class' => 'btn-edit-route')).' | '.$this->Html->link(__('Delete'),array('action' => 'delete', 'manager' => true,$index),array('class' => 'btn-delete-route'))
+											)
+									  );
+					}
 				
-				echo '<div class="route">';
-				echo '<a href="#" class="delete-route" data-routenumber="'.$countRoutes.'">Route löschen</a>';
-				echo $this->Form->input('Route.'.$countRoutes.'.route',array('type' => 'text', 'label' => 'Route', 'default' => $currentRoute['route']));
-				echo $this->Form->input('Route.'.$countRoutes.'.url',array('type' => 'text', 'label' => 'Url', 'default' => implode(':',$currentRoute['url'])));
-				echo "</div>";
-				$countRoutes++;
-			}
-		?>
-		<a id="add-new-route">Neue Route anlegen</a>
-		
-		<div id="routetemplate" style="display:none;" data-route-count="<?php echo $countRoutes; ?>" class="new-route">		
-			<?php
-				echo '<div class="route">';				
-				echo $this->Form->input('Route.##number##.route',array('type' => 'text', 'label' => 'Route'));
-				echo $this->Form->input('Route.##number##.url',array('type' => 'text', 'label' => 'Url'));				
-				echo "</div>";
-			?>
-		</div>
+					echo $this->Html->tableCells($routesArray);
+				?>
+			</tbody>
+		</table>
+	</div>
+	
+	<div id="route-form-edit" style="display: none">
+		<h2><?php echo __("Edit Route")?></h2>
 		<?php
-		echo $this->Form->button('Routen speichern',array('type' => 'submit'));
-		echo $this->Form->end();
+			echo $this->Form->create('Siteroutes',array('url' => array('controller' => 'routes', 'action' => 'edit', 'manager' => true ),'model' => false,'id' => 'RouteEditForm'));
+			echo $this->Form->input('Route.route',array('type' => 'text', 'label' => 'Route'));
+			echo $this->Form->input('Route.url',array('type' => 'text', 'label' => 'Controller'));
+			echo $this->Form->button('Routen speichern',array('type' => 'submit'));
+			echo $this->Form->end();
 		?>
 	</div>
 	
-	<div id="pages">
-		<h2>Mögliche Seiten</h2>
-	<?php
-		foreach($pages as $pagealias => $pagetitle) {
-			echo "<p>Titel: $pagetitle - Alias: $pagealias</p>";
-		}
-	?>
+	<div id="route-form" class="new">
+		<h2><?php echo __("Add new Route")?></h2>
+		<?php
+			echo $this->Form->create('Siteroutes',array('url' => array('controller' => 'routes', 'action' => 'add', 'manager' => true ),'model' => false,'id' => 'RouteNewForm'));
+			echo $this->Form->input('Route.route',array('type' => 'text', 'label' => 'Route'));
+			echo $this->Form->input('Route.url',array('type' => 'text', 'label' => 'Controller'));
+			echo $this->Form->button('Routen speichern',array('type' => 'submit'));
+			echo $this->Form->end();
+		?>
 	</div>	
-	<?php
-	//debug($siteRoutes);
-	//debug($pages);
-	//
-	?>
-	
 </div>
 <?php $this->Js->buffer("
-	
-	$('a#add-new-route').click(function(){
 		
-		var _routecount = $('#routetemplate').attr('data-route-count'),
-			_html = $('#routetemplate').html();
+	$('#site-routes').on('click','a.btn-edit-route',function(){
+		var _parentTr = $(this).parents('tr'),
+			 _number = _parentTr.find('td:eq(0)').text(),
+			 _route = _parentTr.find('td:eq(1)').text(),
+			 _url = _parentTr.find('td:eq(2)').text();
+			
+		$('div#route-form-edit input#RouteRoute').val(_route);
+		$('div#route-form-edit input#RouteUrl').val(_url);
 		
-		_html = _html.replace(/##number##/g,_routecount);
+		$('div#route-form-edit').fadeIn('fast');
 		
-		$(this).before(_html);
-		
-		_routecount = parseInt(_routecount);
-		_routecount++;
-		$('#routetemplate').attr('data-route-count',_routecount);
-		return false;
-	});
-	
-		
-	$('#site-routes').on('click','a.delete-route',function(){
-		var _routeCount = $(this).attr('data-routenumber'),
-			 _parent = $(this).parent();
-			 
-		$.get('/manager/siteconfig/routes/delete/'+_routeCount,function(data){
-		
-			_parent.fadeOut(function(){
-				_parent.remove();
-				});		
+		$('form#RouteEditForm').on('submit',function(){
+			var _url = $(this).attr('action')+'/'+_number+'.json';
+			console.log(_url);
+			var _data = $(this).serialize();
+			
+			$.post(_url,_data,function(response){
+				if(response.result == 'okay') {
+					_parentTr.find('td:eq(1)').text($('div#route-form-edit input#RouteRoute').val());
+					_parentTr.find('td:eq(2)').text($('div#route-form-edit input#RouteUrl').val());
+					$('div#route-form-edit').fadeOut('fast');
+				} else {
+					$('div#route-form-edit').html('<p>Error - Bitte neuladen</p>');	
+				}
+				
+			});
+			return false;
 		});
-	
+		
 		return false;
 	});
 	
