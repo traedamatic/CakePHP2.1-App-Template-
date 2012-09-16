@@ -13,6 +13,14 @@ This template needs CakePHP 2.2.x now!
 
 Just a small config-based UsersController. You can add, list and delete users. No Database needed!
 
+### Plugins
+
+#### Siteconfig
+
+This plugin provides two function.
+
+* "SiteSetting" - You can create custom settings and use them in your app.
+* "DynRoute" function - You can add custom routes for you app. The plugin will automaticlly create the right cakephp routes for you.
 
 ### Views
 
@@ -78,6 +86,11 @@ CssCrush needs wirte access to the webroot/css folder.
 chmod 777 webroot/css
 ```
 
+and the SiteConfig need write access for the configfiles
+
+``` 
+chmod -R 777 Plugin/Siteconfig/Config/Site/*
+```
 
 ## Future Work
 
