@@ -1,4 +1,4 @@
-	<?php
+<?php
 /**
  * SiteConfig Plugin Routes
  * 
