@@ -62,7 +62,7 @@ class SettingsController extends SiteconfigAppController {
 					
 			$key = $this->data['Setting']['key'];			
 			
-			if(isset($this->data['Setting']['namespace'])) {
+			if(isset($this->data['Setting']['namespace']) && !empty($this->data['Setting']['namespace'])) {
 				$settings[$this->data['Setting']['namespace']][$key] = $this->data['Setting']['value'];
 			} else {
 				$settings[$key] = $this->data['Setting']['value'];
@@ -92,8 +92,7 @@ class SettingsController extends SiteconfigAppController {
 		$settingKeys = explode('.',$settingKey);
 		
 		if(isset($settingKeys[0])) {			
-			$settings = $this->Setting->find();
-			debug($settings);
+			$settings = $this->Setting->find();		
 			if(isset($settingKeys[1])) {
 				if(isset($settings[$settingKeys[0]][$settingKeys[1]])) {
 					unset($settings[$settingKeys[0]][$settingKeys[1]]);
