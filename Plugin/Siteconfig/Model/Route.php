@@ -50,26 +50,37 @@ class Route extends SiteconfigAppController {
 				if(empty($route['url']) ||
 						empty($route['route'])) continue;
 				
-				if(is_array($route['url'])) {
+				if(!isset($route['url']['slug'])) {
 					$data['Siteroutes'][] = $route;
 					continue;
 				}
 				
-				$urlArray = explode(':',$route['url']);
-			
-				if(!isset($urlArray[0]) || !isset($urlArray[1])) continue;
+				$urlArray = $route['url'];
 				
-				$url = array(
-								'controller' => $urlArray[0],
-								'action' => $urlArray[1]
-								);
+				//cake url array
+				$url = array();
 				
-				if(isset($urlArray[2])) $url[] = $urlArray[2];
+				//no action no cotroller set skip
+				if(empty($urlArray['controller']) || empty($urlArray['action'])) continue;
+							
+				$url['controller'] = $urlArray['controller'];
+				$url['action'] = $urlArray['action'];
+				
+				//set plugin if  it is not empty 
+				if(!empty($urlArray['plugin'])) $url['plugin'] = $urlArray['plugin'];
+				
+				//set slug if it is not empty
+				
+				if(!empty($urlArray['slug'])) $url[] = $urlArray['slug'];
+								
 				
 				$data['Siteroutes'][] = array(
-									'route' => $route['route'],
-									'url' => $url
-							);
+						'route' => $route['route'],							
+						'url' => $url
+				);	
+								
+				
+				
 			}
 		} else {
 			$data['Siteroutes'] = $newData;

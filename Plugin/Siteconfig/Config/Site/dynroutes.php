@@ -30,5 +30,16 @@
         'action' => 'index',
       ),
     ),
+    3 => 
+    array (
+      'route' => '/test/ttest',
+      'url' => 
+      array (
+        'controller' => 'testttt',
+        'action' => 'super',
+        'plugin' => 'g',
+        0 => 'highggg',
+      ),
+    ),
   ),
 );
