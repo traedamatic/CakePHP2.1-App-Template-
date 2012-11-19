@@ -36,7 +36,7 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		
-		echo $this->Html->script('libs/modernizr-2.5.3.min');
+		echo $this->Html->script('libs/modernizr-2.6.2');
 	?>
 </head>
 <body>
@@ -62,8 +62,8 @@
 	 </footer>
   </div>
 	
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.8.3.min.js"><\/script>')</script>
 
 	<?php
 		echo $this->Html->script('plugins');
