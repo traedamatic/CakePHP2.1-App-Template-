@@ -36,7 +36,7 @@ class UsersController extends AppController {
 	 * custom controller wide beforeRender function
 	 */
 	public function beforeRender(){
-		$this->layout = "manager";
+		if($this->request->params['action'] != 'login') $this->layout = "manager";
 	}
 	
 	/**
@@ -61,6 +61,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 			}
 		}
+		
+		$this->layout = "login";
 	}
 	
 	/**

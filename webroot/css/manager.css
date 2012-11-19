@@ -162,6 +162,31 @@ button {
   margin-top: 10px;
 }
 
+/***
+ * login styles
+ */
+
+@in body.login-layout {
+  #container {
+	 box-shadow: 0px 0px 20px #ccc;
+	 width: 500px;
+	 margin-top: 50px;
+  }
+  
+  @in #container {
+	 
+	 #login {
+		padding: 25px;
+	 }
+	 
+	 #login h1 {
+		border-bottom:  1px dashed #444;
+		font-size: 2.2em;
+	 }
+	 
+  }
+}
+
 @media only screen and (min-width: 35em) {
   
 
