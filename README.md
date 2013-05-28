@@ -7,6 +7,10 @@ This template needs CakePHP 2.2.x now!
 
 ##Including
 
+## GruntJs Script
+
+For watching and compiling Stylus and Coffeescript
+
 ### Controllers
 
 *UsersController*
@@ -31,8 +35,7 @@ This plugin provides two function.
 
 * Jquery - http://jquery.com
 * Modernizr - http://modernizr.com
-* Html 5 Boilerplate mixed with 99lime HTML Kickstart CSS - http://html5boilerplate.com | http://99lime.com
-* CssCrush CakePHP Plugin - https://github.com/traedamatic/CssCrushCakePHP
+* Html 5 Boilerplate mixed with Kube CSS
 * CakeAjaxUploader CakePHP Plugin - https://github.com/traedamatic/CakeAjaxUploader
 
 ### Own Stuff
