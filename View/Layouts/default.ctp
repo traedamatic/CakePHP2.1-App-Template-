@@ -31,7 +31,7 @@
   <?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Csscrush->tag("/css/style.css");
+		echo $this->Html->css("style");
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -62,12 +62,13 @@
 	 </footer>
   </div>
 	
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.8.3.min.js"><\/script>')</script>
 
 	<?php
 		echo $this->Html->script('plugins');
-		echo $this->Html->script('script');
+		
+		echo $this->Html->script('main');
 			
 		echo $this->fetch('script');
 		

@@ -7,3 +7,7 @@ webroot/css/.CssCrush
 webroot/css/.csscrush
 
 webroot/index.php
+
+node_modules
+node_modules/*
+node_modules/**/*

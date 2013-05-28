@@ -28,7 +28,10 @@
   <meta name="viewport" content="width=device-width">
   <?php
 		echo $this->Html->meta('icon');
-		echo $this->Csscrush->tag("/css/manager.css");
+		
+		echo $this->Html->css("kube.min");
+		echo $this->Html->css("manager");
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');		
 		echo $this->Html->script('libs/modernizr-2.6.2');

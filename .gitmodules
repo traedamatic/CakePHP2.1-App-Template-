@@ -1,6 +1,3 @@
-[submodule "Plugin/Csscrush"]
-	path = Plugin/Csscrush
-	url = git://github.com/traedamatic/CssCrushCakePHP.git
 [submodule "Plugin/CakeAjaxUploader"]
 	path = Plugin/CakeAjaxUploader
 	url = git://github.com/traedamatic/CakeAjaxUploader.git

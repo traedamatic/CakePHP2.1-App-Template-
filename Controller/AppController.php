@@ -36,7 +36,7 @@ class AppController extends Controller {
 	/**
 	 * @var array the app wide helpers
 	 */	
-	public $helpers = array('Html','Js' => array('Jquery'), 'Session','Form','Csscrush.Csscrush');
+	public $helpers = array('Html','Js' => array('Jquery'), 'Session','Form');
 	
 	/**
 	 * @var array the app wide helpers

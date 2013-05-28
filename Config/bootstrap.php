@@ -192,7 +192,6 @@ CakeLog::config('error', array(
 
  //CakePlugin::loadAll();
  
- CakePlugin::load('Csscrush');
  //CakePlugin::load('DebugKit'); 
  CakePlugin::load(array('Siteconfig' => array('routes' => true, 'bootstrap' => true)));
  CakePlugin::load(array('CakeAjaxUploader' => array('routes' => true, 'bootstrap' => true)));
